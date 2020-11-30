@@ -90,6 +90,7 @@ function restart() {
     result = 0;
     hangingCards = [];
     setTimeout(() => {
+        clock.textContent = '00:00'
         start();
     }, 5000)
 }
