@@ -47,19 +47,21 @@ h2, .clock {
     cursor: pointer;
     background: url(./images/bg.jpg);
     background-size: cover;
-    transition: all 2s;
 }
 img {
     width: 100%;
+    height: 100%;
     transition: all 2s;
     visibility: hidden;
 }
+.visible {
+    visibility: visible;
+}
 .open {
-    transform: rotateY(360deg);
-    background-color: turquoise;
+    transform: rotateY(180deg);
 }
 .close {
-    transform: rotateY(360deg);
+    transform: rotateY(180deg);
 }
 .disabled {
     pointer-events: none;
