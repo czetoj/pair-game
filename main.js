@@ -7,6 +7,10 @@ let hangingCards;
 let result = 0;
 let timer;
 
+start();
+
+cards.forEach(card => card.addEventListener('click', handleClicked));
+
 function shuffleImages(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -24,10 +28,6 @@ function start() {
         card.classList.remove('disabled');
     })
 }
-
-start();
-
-cards.forEach(card => card.addEventListener('click', handleClicked));
 
 function handleClicked(event) {
     isFirstClick()
@@ -67,19 +67,18 @@ function showImage(event) {
 
 function checkPairs() {
     if (hangingCards.length === 2 && hangingCards[0].getAttribute('value') !== hangingCards[1].getAttribute('value')) {
-        cards.forEach(card => card.classList.add('disabled'));
+        disabled(4000);
         setTimeout(() => {
             hangingCards[0].firstChild.classList.remove('open');
             hangingCards[1].firstChild.classList.remove('open');
             hangingCards[0].firstChild.classList.remove('visible');
             hangingCards[1].firstChild.classList.remove('visible');
-            cards.forEach(card => card.classList.remove('disabled'));
-            hangingCards = [];
         }, 2000)
+
     } else if (hangingCards.length === 2) {
+        disabled(2000);
         hangingCards[0].classList.add('disabled');
         hangingCards[1].classList.add('disabled');
-        hangingCards = [];
         result++;
     }
 }
@@ -93,4 +92,12 @@ function restart() {
         clock.textContent = '00:00'
         start();
     }, 5000)
+}
+
+function disabled(number) {
+    cards.forEach(card => card.classList.add('disabled'));
+    setTimeout(() => {
+        cards.forEach(card => card.classList.remove('disabled'));
+        hangingCards = [];
+    }, number);
 }
